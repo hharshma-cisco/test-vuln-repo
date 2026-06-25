@@ -1,5 +1,5 @@
 requests==2.31.0
 pyyaml==5.4
 flask==2.2.5
-cryptography==38.0.0
+cryptography==38.0.3
 pytest>=8.0.0
