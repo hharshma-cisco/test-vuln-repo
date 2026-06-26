@@ -4,7 +4,7 @@ import tempfile
 
 import pytest
 
-from app import add, greet, encrypt_message, decrypt_message, load_config
+from app import add, greet, encrypt_message, decrypt_message, load_config, generate_rsa_key
 
 
 def test_add():
@@ -27,6 +27,11 @@ def test_encrypt_returns_bytes():
     key, token = encrypt_message("hello")
     assert isinstance(key, bytes)
     assert isinstance(token, bytes)
+
+
+def test_generate_rsa_key():
+    key = generate_rsa_key()
+    assert key.key_size == 2048
 
 
 def test_load_config():
