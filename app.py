@@ -1,4 +1,4 @@
-"""Tiny app that uses a few packages — kept simple so the bump doesn't break anything."""
+"""Simple utility module — kept for the very first smoke test."""
 
 
 def add(a: int, b: int) -> int:
