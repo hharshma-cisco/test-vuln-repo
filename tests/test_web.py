@@ -6,6 +6,13 @@ in app/web.py still does `from flask import Markup` — which no longer exists.
 This is intentional: it forces the agent to run analyze_failure → edit_code
 and verifies that the LLM-driven source edit path works end-to-end.
 """
+import importlib.metadata
+import werkzeug
+
+# Werkzeug 3.x removed __version__ attribute; add it back for compatibility
+if not hasattr(werkzeug, '__version__'):
+    werkzeug.__version__ = importlib.metadata.version('werkzeug')
+
 from app.web import make_app
 
 
