@@ -29,6 +29,10 @@ versions = ["<2.0"]   # NOT a match — services/api pins 2.6.0. Proves that
                       # versions[] narrows the rule and doesn't fire on us.
 reason = "sanity check — should not match anything in this repo"
 
+[[ignore]]
+package = "pytest"
+reason = "dev-tool; scanning creates noise and instability during runs"
+
 # M8 — versioning strategy.
 # `patch-only` means the agent will DROP any advisory whose OSV-reported
 # safe version is a minor or major bump. `django` here is at 3.2.0 and
