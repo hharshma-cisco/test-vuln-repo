@@ -1,0 +1,18 @@
+# Deliberately old versions. Each pin is chosen to exercise a specific
+# agent code path — see test-repo/README.md for the mapping.
+#
+# Safe bumps (tests pass after bump — batch-friendly):
+requests==2.6.0
+urllib3==1.24.0
+jinja2==2.10.0
+#
+# Breaking bump (Flask 2.3 removed `Markup` — forces LLM analyze+edit path):
+flask==2.0.0
+werkzeug==2.0.0
+#
+# Ignored via .vuln-agent.toml [[ignore]] — should NEVER show up in scan:
+pyyaml==5.3
+#
+# Governed by [versioning-strategy] patch-only — the OSV safe version is
+# a minor/major bump, so the advisory should be DROPPED post-scan:
+django==3.2.0

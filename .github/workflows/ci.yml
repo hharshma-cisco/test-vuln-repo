@@ -1,0 +1,31 @@
+# CI workflow — deliberately pins actions to old versions so the
+# github-actions adapter has something to bump.
+#
+#   actions/checkout@v3           — has documented GHA advisories
+#   actions/setup-python@v4       — stable, may or may not have advisories
+#
+# The agent walks .github/workflows/*.yml, extracts each `uses: owner/repo@ref`,
+# and asks OSV for advisories under the "GitHub Actions" ecosystem.
+
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install services/api deps
+        working-directory: services/api
+        run: pip install -r requirements.txt
+      - name: Test services/api
+        working-directory: services/api
+        run: pytest

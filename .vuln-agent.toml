@@ -1,0 +1,38 @@
+# .vuln-agent.toml — exercises every config path.
+
+# Legacy "excluded_packages" field (predates [[ignore]]).
+# `some-legacy-cli` isn't actually installed anywhere, so this line just
+# proves the field is READ without side effects.
+excluded_packages = ["some-legacy-cli"]
+
+[test]
+# Timeout override — the tests are tiny, so 120s is plenty.
+timeout = 120
+
+[pr]
+# Every PR the agent opens gets these labels in ADDITION to the
+# agent-managed vuln-agent:* labels. Use this to verify extra_labels
+# flow all the way through to the GitHub PR.
+extra_labels = ["security", "auto-review"]
+
+# M8 — ignore rules. Two forms:
+#   1. Package pinned across the WHOLE repo (pyyaml matches services/api
+#      AND libs/shared).
+#   2. Package pinned only in a version range.
+[[ignore]]
+package = "pyyaml"
+reason = "legacy — team accepted the risk 2024-08"
+
+[[ignore]]
+package = "requests"
+versions = ["<2.0"]   # NOT a match — services/api pins 2.6.0. Proves that
+                      # versions[] narrows the rule and doesn't fire on us.
+reason = "sanity check — should not match anything in this repo"
+
+# M8 — versioning strategy.
+# `patch-only` means the agent will DROP any advisory whose OSV-reported
+# safe version is a minor or major bump. `django` here is at 3.2.0 and
+# OSV suggests something like 4.2.x — that's a minor bump → dropped.
+[versioning-strategy]
+default = "auto"
+"django" = "patch-only"

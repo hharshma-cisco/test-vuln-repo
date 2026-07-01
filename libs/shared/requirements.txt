@@ -1,0 +1,5 @@
+# This whole sub-project is legacy code that the team has accepted risk on.
+# The root .vuln-agent.toml lists `pyyaml` under [[ignore]], which drops
+# ANY advisory for pyyaml regardless of which manifest it lives in.
+# Use this to verify the ignore rule fires across manifest paths.
+pyyaml==5.3
