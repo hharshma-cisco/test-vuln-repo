@@ -7,7 +7,8 @@ the source-edit path for the agent's fix loop.
 """
 from __future__ import annotations
 
-from flask import Flask, Markup
+from flask import Flask
+from markupsafe import Markup
 
 
 def make_app() -> Flask:
