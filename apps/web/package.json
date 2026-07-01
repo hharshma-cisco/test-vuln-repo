@@ -2,12 +2,12 @@
   "name": "web",
   "version": "0.1.0",
   "private": true,
-  "description": "Test fixture — npm sub-project inside a monorepo. Contains a direct-dep vuln (lodash) and a transitive-dep vuln (qs pulled by express) so both remediation paths are exercised.",
+  "description": "Test fixture \u2014 npm sub-project inside a monorepo. Contains a direct-dep vuln (lodash) and a transitive-dep vuln (qs pulled by express) so both remediation paths are exercised.",
   "scripts": {
     "test": "node --test index.test.js"
   },
   "dependencies": {
-    "lodash": "4.17.4",
+    "lodash": "4.18.0",
     "express": "4.16.0"
   }
 }
